@@ -1,15 +1,16 @@
 import time
 from flask import Blueprint, render_template
-from flask_socketio import SocketIO, emit, send
+from flask_socketio import emit
 from threading import Thread
+from flask_website.common import socket_io
 
 test_socket_io = Blueprint("socket_io", __name__, url_prefix='/test/socket_io')
-socket_io = SocketIO()
 
 
 @test_socket_io.route('/')
 def index():
     return render_template('websocket.html')
+
 
 @socket_io.on('client_event', namespace='/socket_io/test')
 def client_msg(msg):
@@ -31,13 +32,15 @@ class DataPusher(Thread):
             time.sleep(1)
             while self.flag:
                 time.sleep(1)
-                #socket_io.emit 和emit是不一样的
+                # socket_io.emit 和emit是不一样的
                 socket_io.emit('server_response', {'data': time.time()}, namespace='/socket_io/test')
+
     def end(self):
         self.flag = False
 
     def begin(self):
         self.flag = True
+
 
 pusher = None
 
