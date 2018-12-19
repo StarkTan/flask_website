@@ -2,7 +2,7 @@ import time
 from flask import Blueprint, render_template
 from flask_socketio import emit
 from threading import Thread
-from flask_website.common import socket_io
+from flask_website import socket_io
 
 test_socket_io = Blueprint("socket_io", __name__, url_prefix='/test/socket_io')
 
