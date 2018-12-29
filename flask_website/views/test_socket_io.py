@@ -24,7 +24,6 @@ def connected_msg(msg):
 def push_data():
     socket_io.emit('server_response', {'data': time.time()}, namespace='/socket_io/test')
 
-
 @test_socket_io.route('/stop')
 def stop():
     if scheduler.get_job('push_data'):

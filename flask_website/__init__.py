@@ -10,7 +10,12 @@ def init_app():
 
 
 def init_socket_io(app):
-    socket_io = SocketIO()
+    """
+    记录：对于websocket 的实现
+            threading 和 gevent 都使用长连接实现websocket的功能
+            eventlet 实现了websocket的交互方式，但在使用非eventlet产生的线程发送消息的时候会产生问题
+    """
+    socket_io = SocketIO(async_mode='gevent') #eventlet , threading , gevent
     socket_io.init_app(app)
     return socket_io
 
