@@ -3,6 +3,7 @@ from flask import Flask
 from flask_socketio import SocketIO
 from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
+from flask_docs import ApiDoc
 
 
 def init_app():
@@ -34,7 +35,12 @@ def init_db(app):
     return db
 
 
+def init_doc(app):
+    return ApiDoc(app)
+
+
 app = init_app()
 scheduler = init_scheduler(app)
 socket_io = init_socket_io(app)
 db = init_db(app)
+doc = init_doc(app)

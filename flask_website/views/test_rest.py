@@ -23,6 +23,21 @@ class User(db.Model):
 
 @test_rest.route('/', methods=["GET"])
 def get():
+    """Del some data
+
+       @@@
+       #### args
+
+       | args | nullable | type | remark |
+       |--------|--------|--------|--------|
+       |    title    |    false    |    string   |    blog title    |
+       |    name    |    true    |    string   |    person's name    |
+
+       #### return
+       - ##### json
+       > {"msg": "success", "code": 200}
+       @@@
+    """
     users = db.session.query(User).all()
     return jsonify(str(users))
 
