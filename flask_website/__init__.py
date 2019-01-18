@@ -7,7 +7,7 @@ from flask_docs import ApiDoc
 
 
 def init_app():
-    app = Flask(__name__)
+    app = Flask(__name__,static_url_path='')
     app.config.from_pyfile('config.py')
     return app
 
